@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,16 +6,17 @@ public class Principal {
     // Metodo para abrir una cuenta
     public static void abrirCuenta(Scanner scanner, Banco banco) {
         try {
-            String nombre, apellidos, dni, iban;
+            String[] entidades = new String[5];
+            String nombre, apellidos, dni, iban, entidad = "";
             double saldoInicial, interesAnual, maxDescubierto, comisionDescubierto,
                     interesDescubierto, comisionMantenimiento;
             int tipoCuenta;
 
             // Solicita al usuario el nombre, apellidos y DNI del titular
             System.out.println("Introduce el nombre del titular:");
-            nombre = scanner.nextLine();
+            nombre = scanner.next();
 
-            if (!Persona.validarNombreApellido(nombre)){
+            if (!Persona.validarNombreApellido(nombre)) {
                 System.out.println("Utiliza letras, no números.");
             } else {
                 System.out.println("Introduce los apellidos del titular:");
@@ -57,6 +57,15 @@ public class Principal {
                                 case 1:
                                     System.out.println("Introduce el tipo de interés anual:");
                                     interesAnual = Double.parseDouble(scanner.next());
+
+                                    do {
+                                        System.out.println("¿Que entidades deseas acceder a la cuenta? Máximo 5 entidades");
+                                        System.out.println("Escribe salir para salir");
+                                        entidad = scanner.next().toLowerCase();
+                                        for (int i = 0; i < entidades.length; i++) {
+                                            entidades[i] = entidad;
+                                        }
+                                    } while (!entidad.equalsIgnoreCase("salir"));
                                     nuevaCuenta = new CuentaAhorro(titular, iban, saldoInicial, interesAnual);
                                     break;
 
@@ -102,7 +111,7 @@ public class Principal {
 
     // Metodo para listar las cuentas existentes en el banco
     public static void listarCuentas(Banco banco) {
-        if (banco.listadoCuentas().isEmpty()){
+        if (banco.listadoCuentas().isEmpty()) {
             System.out.println("No hay cuentas registradas en el banco");
         } else {
             for (String info : banco.listadoCuentas()) {
@@ -112,7 +121,7 @@ public class Principal {
     }
 
     // Metodo para realizar ingresos en una cuenta
-    public static void realizarIngresos(Scanner scanner, Banco banco){
+    public static void realizarIngresos(Scanner scanner, Banco banco) {
         double cantidadIngreso;
         String ibanIngreso;
 
@@ -126,17 +135,16 @@ public class Principal {
                 System.out.println("Introduce la cantidad que deseas ingresar:");
                 cantidadIngreso = Double.parseDouble(scanner.next());
 
-                if (cantidadIngreso <= 0){
+                if (cantidadIngreso <= 0) {
                     System.out.println("La cantidad ingresada debe ser mayor que 0.");
-                }
-                else {
-                        if (banco.ingresoCuenta(ibanIngreso, cantidadIngreso)) {
-                            System.out.println("Ingreso realizado correctamente.");
-                        } else{
-                            System.out.println("No se ha podido realizar el ingreso.");
-                        }
+                } else {
+                    if (banco.ingresoCuenta(ibanIngreso, cantidadIngreso)) {
+                        System.out.println("Ingreso realizado correctamente.");
+                    } else {
+                        System.out.println("No se ha podido realizar el ingreso.");
                     }
                 }
+            }
         } catch (NumberFormatException e) {
             System.out.println("Error: Introduce una cantidad válida.");
         }
@@ -150,7 +158,7 @@ public class Principal {
         try {
             System.out.println("Introduce el IBAN de la cuenta donde deseas retirar dinero:");
             ibanRetiro = scanner.next();
-            if (!Banco.validarIBAN(ibanRetiro)){
+            if (!Banco.validarIBAN(ibanRetiro)) {
                 System.out.println("IBAN incorrecto, no cumple los requisitos.");
             } else {
                 System.out.println("Introduce la cantidad que deseas retirar:");
@@ -175,7 +183,7 @@ public class Principal {
         try {
             System.out.println("Introduce el IBAN de la cuenta para consultar el saldo:");
             ibanSaldo = scanner.next();
-            if (!Banco.validarIBAN(ibanSaldo)){
+            if (!Banco.validarIBAN(ibanSaldo)) {
                 System.out.println("IBAN incorrecto, no cumple con los requisitos.");
             } else {
                 // Obtiene el saldo de la cuenta
