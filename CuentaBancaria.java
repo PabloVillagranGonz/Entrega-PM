@@ -1,4 +1,5 @@
 public abstract class CuentaBancaria {
+    // Atributos
     private Persona titular;
     private String iban;
     private double saldo;
@@ -8,7 +9,7 @@ public abstract class CuentaBancaria {
         this.iban = iban;
         this.saldo = saldo;
     }
-
+    // Metodos get
     public Persona getTitular() {
         return titular;
     }
@@ -21,10 +22,12 @@ public abstract class CuentaBancaria {
         return saldo;
     }
 
+    // Metodo para ingresar una cantidad de dinero
     public void ingresar(double cantidad) {
         saldo += cantidad;
     }
 
+    // Metodo para retirar una cantidad de dinero
     public boolean retirar(double cantidad) {
         if (saldo >= cantidad) {
             saldo -= cantidad;
@@ -33,5 +36,6 @@ public abstract class CuentaBancaria {
         return false;
     }
 
+    // Metodo abstracto que es implementado por las clases hijas
     public abstract String devolverInfoString();
 }
