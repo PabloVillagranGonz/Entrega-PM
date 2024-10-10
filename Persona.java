@@ -21,8 +21,16 @@ public class Persona implements Imprimible  {
         return dni;
     }
 
+    public static boolean validarNombreApellido(String texto){
+        return texto.matches("[a-zA-ZÁÉÍÓÚáéíóúñÑ]+");
+    }
+
+    public static boolean validarDNI(String dni) {
+        return dni.matches("\\d{8}[A-Za-z]");
+    }
+
     @Override
-    public String imprimir() {
+    public String devolverInfoString() {
         return nombre + " " + apellidos + " (DNI: " + dni + ")";
     }
 }

@@ -8,6 +8,6 @@ public class CuentaCorrientePersonal extends CuentaBancaria {
 
     @Override
     public String devolverInfoString() {
-        return "Cuenta Corriente Personal - IBAN: " + getIban() + ", Titular: " + getTitular() + ", Saldo: " + getSaldo() + ", Comisión de mantenimiento: " + comisionMantenimiento;
+        return "Cuenta Corriente Personal - IBAN: " + getIban() + ", Titular: " + getTitular().devolverInfoString() + ", Saldo: " + getSaldo() + ", Comisión de mantenimiento: " + comisionMantenimiento;
     }
 }

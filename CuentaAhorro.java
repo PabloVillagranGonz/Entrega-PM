@@ -8,6 +8,6 @@ public class CuentaAhorro extends CuentaBancaria {
 
     @Override
     public String devolverInfoString() {
-        return "Cuenta de Ahorro - IBAN: " + getIban() + ", Titular: " + getTitular() + ", Saldo: " + getSaldo() + ", Interés anual: " + interesAnual + "%";
+        return "Cuenta de Ahorro - IBAN: " + getIban() + ", Titular: " + getTitular().devolverInfoString() + ", Saldo: " + getSaldo() + ", Interés anual: " + interesAnual + "%";
     }
 }

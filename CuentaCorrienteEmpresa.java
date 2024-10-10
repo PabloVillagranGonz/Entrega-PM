@@ -12,6 +12,6 @@ public class CuentaCorrienteEmpresa extends CuentaBancaria {
 
     @Override
     public String devolverInfoString() {
-        return "Cuenta Corriente Empresa - IBAN: " + getIban() + ", Titular: " + getTitular() + ", Saldo: " + getSaldo() + ", Máximo descubierto: " + maximoDescubierto + ", Interés por descubierto: " + interesDescubierto + "%, Comisión por descubierto: " + comisionDescubierto;
+        return "Cuenta Corriente Empresa - IBAN: " + getIban() + ", Titular: " + getTitular().devolverInfoString() + ", Saldo: " + getSaldo() + ", Máximo descubierto: " + maximoDescubierto + ", Interés por descubierto: " + interesDescubierto + "%, Comisión por descubierto: " + comisionDescubierto;
     }
 }

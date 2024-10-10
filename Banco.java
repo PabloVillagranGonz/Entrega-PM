@@ -11,6 +11,10 @@ public class Banco {
         return cuentas.add(cuenta);
     }
 
+    public static boolean validarIBAN(String iban) {
+        return iban.matches("ES\\d{20}");
+    }
+
     public ArrayList<String> listadoCuentas() {
         ArrayList<String> listado = new ArrayList<>();
         for (CuentaBancaria cuenta : cuentas) {
